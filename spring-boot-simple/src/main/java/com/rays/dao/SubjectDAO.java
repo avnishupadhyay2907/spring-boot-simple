@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.rays.dto.CourseDTO;
-import com.rays.dto.RoleDTO;
 import com.rays.dto.SubjectDTO;
-import com.rays.dto.UserDTO;
 
 @Repository
 public class SubjectDAO {

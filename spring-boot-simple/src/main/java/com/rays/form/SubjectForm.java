@@ -9,19 +9,14 @@ import com.rays.dto.SubjectDTO;
 
 public class SubjectForm extends BaseForm {
 
-	@NotNull(message = "Course ID is required")
 	private Long courseId;
 
 	@NotEmpty(message = "Subject Name is required")
 	private String subjectName;
 
-	@NotEmpty(message = "Course Name is required")
-	private String courseName;
-
 	@NotEmpty(message = "Description is required")
 	private String description;
 
-	// Getters and Setters
 
 	public Long getCourseId() {
 		return courseId;
@@ -39,14 +34,6 @@ public class SubjectForm extends BaseForm {
 		this.subjectName = subjectName;
 	}
 
-	public String getCourseName() {
-		return courseName;
-	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -61,7 +48,6 @@ public class SubjectForm extends BaseForm {
 		SubjectDTO dto = (SubjectDTO) initDTO(new SubjectDTO());
 		dto.setCourseId(courseId);
 		dto.setSubjectName(subjectName);
-		dto.setCourseName(courseName);
 		dto.setDescription(description);
 		return dto;
 	}

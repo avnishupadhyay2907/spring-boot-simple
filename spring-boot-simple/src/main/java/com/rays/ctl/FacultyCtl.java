@@ -15,18 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rays.common.BaseCtl;
 import com.rays.common.ORSResponse;
-import com.rays.dto.SubjectDTO;
-import com.rays.form.SubjectForm;
-import com.rays.service.SubjectService;
+import com.rays.dto.FacultyDTO;
+import com.rays.form.FacultyForm;
+import com.rays.service.FacultyService;
+
 @RestController
-@RequestMapping(value = "Subject")
-public class SubjectCtl extends BaseCtl {
+@RequestMapping(value = "Faculty")
+public class FacultyCtl extends BaseCtl{
 
 	@Autowired
-	public SubjectService subjectService;
+	public FacultyService facultyService;
 
 	@PostMapping("save")
-	public ORSResponse save(@RequestBody @Valid SubjectForm form, BindingResult bindingResult) {
+	public ORSResponse save(@RequestBody @Valid FacultyForm form, BindingResult bindingResult) {
 
 		ORSResponse res = validate(bindingResult);
 
@@ -34,16 +35,16 @@ public class SubjectCtl extends BaseCtl {
 			return res;
 		}
 
-		SubjectDTO dto = (SubjectDTO) form.getDto();
+		FacultyDTO dto = (FacultyDTO) form.getDto();
 
 		if (dto.getId() != null && dto.getId() > 0) {
-			subjectService.update(dto);
+			facultyService.update(dto);
 			res.addData(dto.getId());
-			res.addMessage("User Updated Successfully..!!");
+			res.addMessage("Faculty Updated Successfully..!!");
 		} else {
-			long pk = subjectService.add(dto);
+			long pk = facultyService.add(dto);
 			res.addData(pk);
-			res.addMessage("User added Successfully..!!");
+			res.addMessage("Faculty added Successfully..!!");
 		}
 		return res;
 	}
@@ -53,7 +54,7 @@ public class SubjectCtl extends BaseCtl {
 
 		ORSResponse res = new ORSResponse();
 
-		SubjectDTO dto = subjectService.findById(id);
+		FacultyDTO dto = facultyService.findById(id);
 
 		res.addData(dto);
 
@@ -66,22 +67,22 @@ public class SubjectCtl extends BaseCtl {
 		ORSResponse res = new ORSResponse();
 
 		for (long id : ids) {
-			subjectService.delete(id);
+			facultyService.delete(id);
 		}
 
-		res.addMessage("User deleted successfully");
+		res.addMessage("Faculty deleted successfully");
 
 		return res;
 	}
 
 	@PostMapping("search/{pageNo}")
-	public ORSResponse search(@RequestBody SubjectForm form, @PathVariable int pageNo) {
+	public ORSResponse search(@RequestBody FacultyForm form, @PathVariable int pageNo) {
 
 		ORSResponse res = new ORSResponse();
 
-		SubjectDTO dto = (SubjectDTO) form.getDto();
+		FacultyDTO dto = (FacultyDTO) form.getDto();
 
-		List list = subjectService.search(dto, pageNo, 5);
+		List list = facultyService.search(dto, pageNo, 5);
 
 		if (list.size() == 0) {
 			res.addMessage("Result not found...!!!");
@@ -90,4 +91,5 @@ public class SubjectCtl extends BaseCtl {
 		}
 		return res;
 	}
+
 }
